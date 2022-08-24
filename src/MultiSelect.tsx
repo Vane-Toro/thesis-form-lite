@@ -10,8 +10,8 @@ export const MultiSelect = ({ options }: Props) => {
             {options.map((option: string, i: number) => {
                 return (
                     <>
-                        <label htmlFor={option}>{option}</label>
-                        <input key={i} name={option} value={option} type='checkbox' />
+                        <label key={`label-${i}`} htmlFor={option}>{option}</label>
+                        <input key={`input-${i}`} name={option} value={option} type='checkbox' />
                     </>
                 )
 

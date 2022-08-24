@@ -13,8 +13,8 @@ export const SingleSelect = ({ options, questionNumber }: Props) => {
                 options.map((option: string, i: number) => {
                     return (
                         <>
-                            <label htmlFor={option}>{option}</label>
-                            <input key={i} value={option} type='radio' name={questionNumber} />
+                            <label key={`label-${i}`} htmlFor={option}>{option}</label>
+                            <input key={`input-${i}`} value={option} type='radio' name={questionNumber} />
                         </>
                     )
 

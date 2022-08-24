@@ -10,4 +10,4 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default = () => <SingleSelect options={['option-1', 'option-2', 'option-3']} questionNumber={1} />;
+export const Default = () => <SingleSelect options={['option-1', 'option-2', 'option-3']} questionNumber={'1'} />;

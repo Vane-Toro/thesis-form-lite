@@ -9,4 +9,4 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default = () => <TitleBlock title={'Some title'} />
+export const Default = () => <TitleBlock kicker='Some small text' title='This is the title' text="This is the text" />;
