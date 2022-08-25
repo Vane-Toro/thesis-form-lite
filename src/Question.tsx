@@ -8,9 +8,8 @@ import cx from 'classnames'
 interface Props {
     options: string[],
     title: string,
-    questionNumber: string,
+    questionNumber: number,
     questionType: 'singleSelect' | 'multiSelect',
-    ctaText: string,
     classes?: string
 }
 
@@ -20,7 +19,6 @@ export const Question = ({ options, title, questionNumber, questionType, ctaText
             < TitleBlock title={title} />
             {questionType === 'singleSelect' && <SingleSelect options={options} questionNumber={questionNumber} />}
             {questionType === 'multiSelect' && <MultiSelect options={options} />}
-            <Button ctaText={ctaText} />
         </div >
     )
 }
