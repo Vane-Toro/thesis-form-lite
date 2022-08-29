@@ -1,24 +1,28 @@
-import React, { useState, ReactNode, ReactComponentElement } from 'react';
-import { Button } from './Button';
+import React, { ReactNode } from 'react';
+import { QuestionContextProvider } from './QuestionContext'
 interface Props {
     children: ReactNode,
     ctaText: string
 }
 
 
-export const TFL = ({ children, ctaText }: Props) => {
-    const [currentQuestion, setCurrentQuestion] = useState(0)
-    console.log(children);
 
 
+export const TFL = ({ children }: Props) => {
 
 
     return (
-        <div className="tfl-wrapper" >
-            {children}
-            {/* {children.type === 'button' && <Button as=onClick={() => setCurrentQuestion(currentQuestion + 1)} ctaText={ctaText} />} */}
+        <QuestionContextProvider>
 
-        </div>
+            <>
+
+                <div className="tfl-wrapper" >
+                    {children}
+
+                </div>
+            </>
+        </QuestionContextProvider>
+
     )
 }
 

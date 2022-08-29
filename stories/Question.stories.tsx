@@ -10,4 +10,4 @@ const meta: Meta = {
 export default meta;
 
 export const SingleSelect = () => <Question title={'This is a single select question'} options={['option-1', 'option-2', 'option-3']} questionNumber={'1'} questionType='singleSelect' ctaText="Next" classes="optional" />;
-export const MultiSelect = () => <Question title={'This is a multi select question'} options={['option-1', 'option-2', 'option-3']} questionNumber={'1'} questionType='multiSelect' ctaText="Next" />;
+export const MultiSelect = () => <Question title={'This is a multi select question'} options={['option-1', 'option-2', 'option-3']} questionNumber={'1'} questionType='multiSelect' ctaText="optional" />;
