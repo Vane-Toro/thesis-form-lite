@@ -13,6 +13,12 @@ export const SingleSelect = ({ choices, ctaText, questionNumber, handleAnswerCli
 
     const setSelectedChoice = (e) => {
         setSelected(e.target.value)
+
+        // If ctaText is not defined, then we immediately call the handleAnswerClick function
+        if (!ctaText) {
+            handleAnswerClick(e.target.value)
+        }
+
     }
 
     return (
@@ -20,9 +26,9 @@ export const SingleSelect = ({ choices, ctaText, questionNumber, handleAnswerCli
             {
                 choices.map((option: object, i: number) => {
                     return (
-                        <fieldset >
-                            <label key={`label-${i}`} htmlFor={option.value}>{option.value}</label>
-                            <input key={`input-${i}`} value={option.value} type='radio' name={`question-${questionNumber}`} onChange={setSelectedChoice} />
+                        <fieldset key={`fieldset-${i}`}>
+                            <label htmlFor={option.value}>{option.value}</label>
+                            <input value={option.value} type='radio' name={`question-${questionNumber}`} onChange={setSelectedChoice} />
                         </fieldset>
                     )
                 })
@@ -30,6 +36,4 @@ export const SingleSelect = ({ choices, ctaText, questionNumber, handleAnswerCli
             {ctaText && <button onClick={() => handleAnswerClick(seletected)} > {ctaText}</button >}
         </>
     )
-
-
 }
