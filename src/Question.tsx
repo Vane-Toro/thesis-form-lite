@@ -1,32 +1,29 @@
-import React from "react";
+import React, { useReducer, useEffect, ReactNode } from "react";
 import { TitleBlock } from "./TitleBlock"
 import { SingleSelect } from "./SingleSelect"
 import { MultiSelect } from "./MultiSelect"
-import { Button } from "./Button";
-import { useQuestionContext } from './QuestionContext'
 
 import cx from 'classnames'
 
 interface Props {
-    options: string[],
-    title: string,
-
-    questionType: 'singleSelect' | 'multiSelect',
-    classes?: string,
-    ctaText?: string,
+    question: object,
+    dispatch: Function
 }
 
-export const Question = ({ options, title, questionType, classes, ctaText }: Props) => {
-    const questionNumber = useQuestionContext()
+export const Question = ({ question, dispatch }: Props) => {
+
+    const handleAnswerClick = (value: string) => {
+        dispatch({ type: 'answer', payload: value })
+    }
 
 
     return (
-        <div className={cx(classes, `question question-${questionNumber}`)} >
-            < TitleBlock title={title} />
-            <h1>Current question is {questionNumber}</h1>
-            {questionType === 'singleSelect' && <SingleSelect options={options} questionNumber={questionNumber} />}
-            {questionType === 'multiSelect' && <MultiSelect options={options} />}
-            {ctaText && <Button ctaText={ctaText} />}
+        <div className={cx(question.classes, `question question-${question.id}`)} >
+            < TitleBlock title={question.title} />
+            <h1>Current question is {question.id}</h1>
+            {question.type === 'SingleSelect' && <SingleSelect choices={question.choices} ctaText={question.ctaText} questionNumber={question.id} handleAnswerClick={handleAnswerClick} />}
+            {question.type === 'MultiSelect' && <MultiSelect choices={question.choices} />}
+
         </div >
     )
 }

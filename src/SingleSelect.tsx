@@ -1,26 +1,33 @@
-import React, { HTMLAttributes, } from "react";
+import React, { HTMLAttributes, useState, } from "react";
+
 
 interface Props extends HTMLAttributes<HTMLElement> {
-    options: string[],
-    questionNumber: number
+    choices: object[],
+    ctaText?: string,
+    questionNumber: number,
+    handleAnswerClick: Function,
 }
 
-export const SingleSelect = ({ options, questionNumber }: Props) => {
+export const SingleSelect = ({ choices, ctaText, questionNumber, handleAnswerClick }: Props) => {
+    const [seletected, setSelected] = useState('')
+
+    const setSelectedChoice = (e) => {
+        setSelected(e.target.value)
+    }
+
     return (
         <>
-
             {
-                options.map((option: string, i: number) => {
+                choices.map((option: object, i: number) => {
                     return (
-                        <>
-                            <label key={`label-${i}`} htmlFor={option}>{option}</label>
-                            <input key={`input-${i}`} value={option} type='radio' name={`${questionNumber}`} />
-                        </>
+                        <fieldset >
+                            <label key={`label-${i}`} htmlFor={option.value}>{option.value}</label>
+                            <input key={`input-${i}`} value={option.value} type='radio' name={`question-${questionNumber}`} onChange={setSelectedChoice} />
+                        </fieldset>
                     )
-
                 })
             }
-
+            {ctaText && <button onClick={() => handleAnswerClick(seletected)} > {ctaText}</button >}
         </>
     )
 
