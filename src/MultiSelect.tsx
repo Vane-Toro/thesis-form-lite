@@ -1,21 +1,33 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useState } from 'react';
 
 interface Props extends HTMLAttributes<HTMLInputElement> {
-    options: string[],
+    choices: object[],
+    ctaText: string,
+    handleAnswerClick: Function,
 }
 
-export const MultiSelect = ({ options }: Props) => {
+
+export const MultiSelect = ({ choices, ctaText, handleAnswerClick }: Props) => {
+    const [selections, setSelections] = useState([]);
+
+    const updateSelections = (e) => {
+        selections.includes(e.target.name) ? setSelections(selections.filter(selection => selection !== e.target.name)) : setSelections([...selections, e.target.name])
+    }
+
     return (
         <>
-            {options.map((option: string, i: number) => {
+            {choices.map((option: object, i: number) => {
                 return (
                     <>
-                        <label key={`label-${i}`} htmlFor={option}>{option}</label>
-                        <input key={`input-${i}`} name={option} value={option} type='checkbox' />
+                        <fieldset key={`fieldset-${i}`} >
+                            <label htmlFor={option.value}>{option.value}</label>
+                            <input name={option.value} value={option} type='checkbox' onChange={updateSelections} />
+                        </fieldset>
                     </>
                 )
 
             })}
+            <button onClick={() => handleAnswerClick(selections)}> {ctaText}</button >
         </>
 
     )
