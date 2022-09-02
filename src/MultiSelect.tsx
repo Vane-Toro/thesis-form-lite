@@ -1,33 +1,39 @@
-import React, { HTMLAttributes, useState } from 'react';
+import React, { HTMLAttributes, useState, ChangeEvent } from 'react';
+import { questionTypes } from './types';
 
 interface Props extends HTMLAttributes<HTMLInputElement> {
-    choices: object[],
-    ctaText: string,
+    choices: questionTypes["choices"],
+    ctaText?: string,
     handleAnswerClick: Function,
 }
 
 
-export const MultiSelect = ({ choices, ctaText, handleAnswerClick }: Props) => {
-    const [selections, setSelections] = useState([]);
 
-    const updateSelections = (e) => {
-        selections.includes(e.target.name) ? setSelections(selections.filter(selection => selection !== e.target.name)) : setSelections([...selections, e.target.name])
+
+
+export const MultiSelect = ({ choices, ctaText, handleAnswerClick }: Props) => {
+    const [selections, setSelections] = useState<String[]>([]);
+    console.log(choices);
+
+    const updateSelections = (e: ChangeEvent<HTMLInputElement>) => {
+
+        selections.includes(e.target.value) ? setSelections(selections.filter(selection => selection !== e.target.value)) : setSelections([...selections, e.target.value])
     }
 
     return (
         <>
-            {choices.map((option: object, i: number) => {
+            {choices.map((option, i: number) => {
                 return (
                     <>
                         <fieldset key={`fieldset-${i}`} >
                             <label htmlFor={option.value}>{option.value}</label>
-                            <input name={option.value} value={option} type='checkbox' onChange={updateSelections} />
+                            <input name={option.value} value={option.value} type='checkbox' onChange={updateSelections} />
                         </fieldset>
                     </>
                 )
 
             })}
-            <button onClick={() => handleAnswerClick(selections)}> {ctaText}</button >
+            <button onClick={() => handleAnswerClick(selections)}> {ctaText || 'Next'}</button >
         </>
 
     )
