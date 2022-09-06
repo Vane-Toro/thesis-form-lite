@@ -11,7 +11,7 @@ const initialQuizState = {
             title: 'Single Select Question',
             text: "Here is some text",
             image: 'https://uploads-ssl.webflow.com/5f8efd7611c46166adb2f1aa/60259f77e5d4f1879bc98285_Combined.svg',
-            choices: [
+            options: [
                 { value: 'First choice', image: 'https://uploads-ssl.webflow.com/5f8efd7611c46166adb2f1aa/60259f77e5d4f1879bc98285_Combined.svg', imageAlt: 'Thesis Logo' },
                 { value: 'Second choice' },
             ],
@@ -21,7 +21,7 @@ const initialQuizState = {
             type: 'SingleSelect',
             title: 'Second question',
             ctaText: 'Next question',
-            choices: [
+            options: [
                 { value: 'First choice second' },
                 { value: 'Second choice second' },
             ],
@@ -31,7 +31,7 @@ const initialQuizState = {
             type: 'MultiSelect',
             text: 'Third question',
             ctaText: 'Next question',
-            choices: [
+            options: [
                 { value: 'First choice third' },
                 { value: 'Second choice third' },
             ],

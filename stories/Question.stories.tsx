@@ -7,7 +7,31 @@ const meta: Meta = {
     component: Question,
 }
 
+const singleSelectProps = {
+    id: 1,
+    type: 'SingleSelect',
+    title: 'Single Select Question',
+    text: "Here is some text",
+    image: 'https://uploads-ssl.webflow.com/5f8efd7611c46166adb2f1aa/60259f77e5d4f1879bc98285_Combined.svg',
+    options: [
+        { value: 'First choice', },
+        { value: 'Second choice' },
+    ],
+}
+const MultiSelectProps = {
+    id: 1,
+    type: 'MultiSelect',
+    title: 'Multi Select Question',
+    text: "Here is some text",
+    image: 'https://uploads-ssl.webflow.com/5f8efd7611c46166adb2f1aa/60259f77e5d4f1879bc98285_Combined.svg',
+    options: [
+        { value: 'First choice', },
+        { value: 'Second choice' },
+        { value: 'Third choice' },
+    ],
+}
+
 export default meta;
 
-export const SingleSelect = () => <Question title={'This is a single select question'} options={['option-1', 'option-2', 'option-3']} questionNumber={'1'} questionType='singleSelect' ctaText="Next" classes="optional" />;
-export const MultiSelect = () => <Question title={'This is a multi select question'} options={['option-1', 'option-2', 'option-3']} questionNumber={'1'} questionType='multiSelect' ctaText="optional" />;
+export const SingleSelect = () => <Question question={singleSelectProps} />;
+export const MultiSelect = () => <Question question={MultiSelectProps} />;

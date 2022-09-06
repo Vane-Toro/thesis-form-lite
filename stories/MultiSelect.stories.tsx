@@ -8,6 +8,11 @@ const meta: Meta = {
     component: MultiSelect,
 }
 
+const options = [
+    { value: 'First choice', },
+    { value: 'Second choice' },
+]
+
 export default meta;
 
-export const Default = () => <MultiSelect options={['option-1', 'option-2', 'option-3']} />;
+export const Default = () => <MultiSelect options={options} />;
