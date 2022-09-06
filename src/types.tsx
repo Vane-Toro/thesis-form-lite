@@ -1,5 +1,5 @@
 export type questionTypes = {
-    choices: { value: string, image?: string, imageAlt?: string }[],
+    options: { value: string, image?: string, imageAlt?: string }[],
     image?: string,
     imageAlt?: string,
     ctaText?: string,

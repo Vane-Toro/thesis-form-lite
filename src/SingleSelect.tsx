@@ -2,14 +2,14 @@ import React, { HTMLAttributes, useState, ChangeEvent } from "react";
 import { questionTypes } from "./types";
 
 export interface SingleSelectProps extends HTMLAttributes<HTMLElement> {
-    choices: questionTypes["choices"],
+    options: questionTypes["options"],
     ctaText?: string,
     questionNumber: number,
     handleAnswerClick: Function,
 }
 
 
-export const SingleSelect = ({ choices, ctaText, questionNumber, handleAnswerClick }: SingleSelectProps) => {
+export const SingleSelect = ({ options, ctaText, questionNumber, handleAnswerClick }: SingleSelectProps) => {
     const [selected, setSelected] = useState<string>('')
 
     const setSelectedChoice = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,8 +23,8 @@ export const SingleSelect = ({ choices, ctaText, questionNumber, handleAnswerCli
     }
 
     const submitAnswer = (value: string) => {
-        handleAnswerClick(value)
         setSelected('')
+        handleAnswerClick(value)
     }
 
 
@@ -32,7 +32,7 @@ export const SingleSelect = ({ choices, ctaText, questionNumber, handleAnswerCli
     return (
         <>
             {
-                choices.map((option, i: number) => {
+                options.map((option, i: number) => {
                     return (
                         <fieldset key={`fieldset-${i}`}>
                             {option.image && <img src={option.image} alt={option.imageAlt} />}

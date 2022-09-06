@@ -2,7 +2,7 @@ import React, { HTMLAttributes, useState, ChangeEvent } from 'react';
 import { questionTypes } from './types';
 
 interface Props extends HTMLAttributes<HTMLInputElement> {
-    choices: questionTypes["choices"],
+    options: questionTypes["options"],
     ctaText?: string,
     handleAnswerClick: Function,
 }
@@ -11,9 +11,8 @@ interface Props extends HTMLAttributes<HTMLInputElement> {
 
 
 
-export const MultiSelect = ({ choices, ctaText, handleAnswerClick }: Props) => {
+export const MultiSelect = ({ options, ctaText, handleAnswerClick }: Props) => {
     const [selections, setSelections] = useState<String[]>([]);
-    console.log(choices);
 
     const updateSelections = (e: ChangeEvent<HTMLInputElement>) => {
 
@@ -22,10 +21,11 @@ export const MultiSelect = ({ choices, ctaText, handleAnswerClick }: Props) => {
 
     return (
         <>
-            {choices.map((option, i: number) => {
+            {options.map((option, i: number) => {
                 return (
                     <>
                         <fieldset key={`fieldset-${i}`} >
+                            {option.image && <img src={option.image} alt={option.imageAlt} />}
                             <label htmlFor={option.value}>{option.value}</label>
                             <input name={option.value} value={option.value} type='checkbox' onChange={updateSelections} />
                         </fieldset>

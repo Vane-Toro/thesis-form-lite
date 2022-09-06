@@ -23,8 +23,8 @@ export const Question = ({ question, dispatch }: Props) => {
         <div className={cx(question.classes, `question question-${question.id}`)} >
             < TitleBlock title={question.title} />
             {question.image && <ImageBlock source={question.image} imageAlt={question.imageAlt} />}
-            {question.type === 'SingleSelect' && <SingleSelect choices={question.choices} ctaText={question.ctaText} questionNumber={question.id} handleAnswerClick={handleAnswerClick} />}
-            {question.type === 'MultiSelect' && <MultiSelect choices={question.choices} ctaText={question.ctaText} handleAnswerClick={handleAnswerClick} />}
+            {question.type === 'SingleSelect' && <SingleSelect options={question.options} ctaText={question.ctaText} questionNumber={question.id} handleAnswerClick={handleAnswerClick} />}
+            {question.type === 'MultiSelect' && <MultiSelect options={question.options} ctaText={question.ctaText} handleAnswerClick={handleAnswerClick} />}
 
         </div >
     )
