@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useState, ChangeEvent, useRef } from "react";
+import React, { HTMLAttributes, useState, ChangeEvent } from "react";
 import { QuestionTypes } from "./types";
 
 export interface SingleSelectProps extends HTMLAttributes<HTMLElement> {
