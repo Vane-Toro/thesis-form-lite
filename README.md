@@ -4,8 +4,7 @@ A lighter version of Thesis Form built for on React.
 
 ## Installation
 
-1. Create new quiz on react app
-2. Add the following code to the page where you quiz will run.
+**Add the following code to the page where you quiz will run.**
 
 ```jsx
 const quizReducer = (state, action) => {
@@ -59,6 +58,58 @@ const Quiz = ({ initialQuizState }) => {
       )}
     </div>
   );
+};
+```
+
+In a separate file create the quiz state. Below is an example of what it should include.
+
+```js
+const initialQuizState = {
+  step: 0,
+  questions: [
+    {
+      id: 1,
+      type: 'MultiSelect',
+      title: 'Single Select Question',
+      text: 'Here is some text',
+      image:
+        'https://uploads-ssl.webflow.com/5f8efd7611c46166adb2f1aa/60259f77e5d4f1879bc98285_Combined.svg',
+      options: [{ value: 'First choice' }, { value: 'Second choice' }],
+    },
+    {
+      id: 2,
+      type: 'SingleSelect',
+      title: 'Second question',
+      ctaText: 'Next question',
+      options: [
+        { value: 'First choice second' },
+        { value: 'Second choice second' },
+      ],
+    },
+    {
+      id: 3,
+      type: 'MultiSelect',
+      text: 'Third question',
+      ctaText: 'Next question',
+      options: [
+        { value: 'First choice third' },
+        { value: 'Second choice third' },
+        { value: 'Third choice third' },
+      ],
+    },
+    {
+      id: 4,
+      type: 'MultiSelect',
+      text: 'Third question',
+      ctaText: 'Next question',
+      options: [
+        { value: 'First choice fourth' },
+        { value: 'Second choice fourth' },
+        { value: 'Third choice fourth' },
+      ],
+    },
+  ],
+  answers: [],
 };
 ```
 
