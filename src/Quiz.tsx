@@ -1,19 +1,19 @@
 import React, { useEffect, useReducer } from 'react'
 import { Question } from './Question'
-import { questionTypes } from './types'
+import { QuestionTypes } from './types'
 
-type stateTypes = {
+type StateTypes = {
     step: number,
     answers: string[],
-    questions: questionTypes[],
+    questions: QuestionTypes[],
 }
 
-type actionTypes = {
+type ActionTypes = {
     payload: string,
     type: string,
 }
 
-const quizReducer = (state: stateTypes, action: actionTypes) => {
+const quizReducer = (state: StateTypes, action: ActionTypes) => {
     switch (action.type) {
         case 'answer':
             const answers = [...state.answers, action.payload]
@@ -26,16 +26,61 @@ const quizReducer = (state: stateTypes, action: actionTypes) => {
     }
 }
 
+
+
+const CustomQuestion = ({ state, dispatch }) => {
+    let question = state.questions[state.answers.length]
+
+    const handleAnswerClick = (choice) => {
+        dispatch({ type: 'answer', payload: choice.value })
+    }
+    return (
+        <>
+            <div>Custom Question</div>
+            <ul>
+                {question.choices.map((choice) => {
+                    return (
+                        <li key={choice.value}>
+                            <button onClick={() => handleAnswerClick(choice)}>
+                                {choice.value}
+                            </button>
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
+    )
+}
+
+const Results = ({ state, dispatch }) => {
+    return (
+        <div>{JSON.stringify(state)}</div>
+
+    )
+}
+
+const Interstitial = ({ state, dispatch }) => {
+    return (
+        <div>
+            <div>Interstitial</div>
+            <button onClick={() => dispatch({ type: 'answer', payload: 'interstitial' })}>
+                Reset
+            </button>
+        </div>
+    )
+}
+
+
 const ComponentMap: { [key: string]: React.ComponentType<any> } = {
     SingleSelect: Question,
     MultiSelect: Question,
-    // Custom: CustomQuestion,
-    // Interstitial: Interstitial
+    Custom: CustomQuestion,
+    Interstitial: Interstitial
 }
 
 interface DynamicComponentProps {
-    question: questionTypes,
-    state: stateTypes,
+    question: QuestionTypes,
+    state: StateTypes,
     dispatch: React.Dispatch<any>
 }
 
@@ -53,23 +98,25 @@ const DynamicComponent = (props: DynamicComponentProps) => {
 
 interface quizPropTypes {
     step: number,
-    questions: questionTypes[],
+    questions: QuestionTypes[],
     answers: string[],
 }
 
 
-const Quiz = (initialQuizState: quizPropTypes) => {
-    let [state, dispatch] = useReducer<object, object>(quizReducer, initialQuizState)
+const Quiz = ({ initialQuizState }: any /*fix this*/) => {
+    console.log(initialQuizState);
+
+    let [state, dispatch] = useReducer(quizReducer, initialQuizState)
 
     useEffect(() => {
         // console.log('Pull in initial quiz state and set it')
-        dispatch({ type: 'set_state', payload: initialQuizState })
+        dispatch({ type: 'set_state', payload: state })
     }, [initialQuizState])
 
     return (
         <div>
             {
-                state.answers.length < 3
+                state.answers.length < state.questions.length
                     ? <DynamicComponent question={state.questions[state.step]} state={state} dispatch={dispatch} />
                     : <Results state={state} dispatch={dispatch} />
             }
@@ -83,47 +130,4 @@ export default Quiz
 
 
 
-// const CustomQuestion = ({ state, dispatch }) => {
-//     let question = state.questions[state.answers.length]
 
-//     const handleAnswerClick = (choice) => {
-//         dispatch({ type: 'answer', payload: choice.value })
-//     }
-//     return (
-//         <>
-//             <div>Custom Question</div>
-//             <ul>
-//                 {question.choices.map((choice) => {
-//                     return (
-//                         <li key={choice.value}>
-//                             <button onClick={() => handleAnswerClick(choice)}>
-//                                 {choice.value}
-//                             </button>
-//                         </li>
-//                     )
-//                 })}
-//             </ul>
-//         </>
-//     )
-// }
-
-// const Results = ({ state, dispatch }) => {
-//     let answers = state.answers
-
-//     return (
-//         <div>{JSON.stringify(state)}</div>
-
-//     )
-// }
-
-// const Interstitial = ({ state, dispatch }) => {
-//     return (
-//         <div>
-//             <div>Interstitial</div>
-//             <TitleBlock title='title' />
-//             <button onClick={() => dispatch({ type: 'answer', payload: 'interstitial' })}>
-//                 Reset
-//             </button>
-//         </div>
-//     )
-// }
