@@ -4,11 +4,10 @@ A lighter version of Thesis Form built for on React.
 
 ## Installation
 
-**Create new quiz on react app**
+1. Create new quiz on react app
+2. Add the following code to the page where you quiz will run.
 
 ```jsx
-// In your quiz page add the following code
-
 const quizReducer = (state, action) => {
   switch (action.type) {
     case 'answer':
