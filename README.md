@@ -1,6 +1,6 @@
 # Thesis-Form-Lite
 
-A lighter version of Thesis Form built for on React.
+A lighter version of Thesis Form built in React.
 
 ## Installation
 
