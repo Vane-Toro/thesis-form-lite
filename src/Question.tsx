@@ -3,12 +3,12 @@ import { TitleBlock } from "./TitleBlock"
 import { SingleSelect } from "./SingleSelect"
 import { MultiSelect } from "./MultiSelect"
 import { ImageBlock } from "./ImageBlock";
-import { questionTypes } from "./types";
+import { QuestionTypes } from "./types";
 
 import cx from 'classnames'
 
 interface Props {
-    question: questionTypes,
+    question: QuestionTypes,
     dispatch: React.Dispatch<any>
 }
 
