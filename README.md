@@ -1,3 +1,68 @@
+# Thesis-Form-Lite
+
+A lighter version of Thesis Form built for on React.
+
+## Installation
+
+**Create new quiz on react app**
+
+```jsx
+// In your quiz page add the following code
+
+const quizReducer = (state, action) => {
+  switch (action.type) {
+    case 'answer':
+      const answers = [...state.answers, action.payload];
+      const step = state.step + 1;
+      return { ...state, answers, step };
+    case 'set_state':
+      return action.payload;
+    default:
+      throw new Error('Unexpected error');
+  }
+};
+
+const ComponentMap = {
+  SingleSelect: Question,
+  MultiSelect: Question,
+  // Custom: CustomQuestion, you can add any key/value pair for custom components
+  // Interstitial: Interstitial,
+};
+
+const DynamicComponent = props => {
+  const { question, state, dispatch } = props;
+
+  return React.createElement(ComponentMap[question.type], {
+    question: question,
+    state: state,
+    dispatch: dispatch,
+  });
+};
+
+const Quiz = ({ initialQuizState }) => {
+  let [state, dispatch] = useReducer(quizReducer, initialQuizState);
+
+  useEffect(() => {
+    // console.log('Pull in initial quiz state and set it')
+    dispatch({ type: 'set_state', payload: state });
+  }, [initialQuizState]);
+
+  return (
+    <div>
+      {state.answers.length < state.questions.length ? (
+        <DynamicComponent
+          question={state.questions[state.step]}
+          state={state}
+          dispatch={dispatch}
+        />
+      ) : (
+        <Results state={state} dispatch={dispatch} />
+      )}
+    </div>
+  );
+};
+```
+
 # TSDX React w/ Storybook User Guide
 
 Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
