@@ -1,8 +1,8 @@
-import React, { HTMLAttributes, useState, ChangeEvent } from "react";
-import { questionTypes } from "./types";
+import React, { HTMLAttributes, useState, ChangeEvent, useRef } from "react";
+import { QuestionTypes } from "./types";
 
 export interface SingleSelectProps extends HTMLAttributes<HTMLElement> {
-    options: questionTypes["options"],
+    options: QuestionTypes["options"],
     ctaText?: string,
     questionNumber: number,
     handleAnswerClick: Function,
@@ -11,7 +11,6 @@ export interface SingleSelectProps extends HTMLAttributes<HTMLElement> {
 
 export const SingleSelect = ({ options, ctaText, questionNumber, handleAnswerClick }: SingleSelectProps) => {
     const [selected, setSelected] = useState<string>('')
-
     const setSelectedChoice = (e: ChangeEvent<HTMLInputElement>) => {
         setSelected(e.target.value)
 
@@ -37,7 +36,7 @@ export const SingleSelect = ({ options, ctaText, questionNumber, handleAnswerCli
                         <fieldset key={`fieldset-${i}`}>
                             {option.image && <img src={option.image} alt={option.imageAlt} />}
                             <label htmlFor={option.value}>{option.value}</label>
-                            <input value={option.value} type='radio' name={`question-${questionNumber}`} onChange={setSelectedChoice} />
+                            <input value={option.value} checked={selected === option.value} type='radio' name={`question-${questionNumber}`} onChange={setSelectedChoice} />
                         </fieldset>
                     )
                 })
