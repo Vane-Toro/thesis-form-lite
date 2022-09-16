@@ -24,6 +24,9 @@
   "peerDependencies": {
     "react": ">=16"
   },
+  "dependencies": {
+    "@sheridan-media/tpl-react": "0.1.4"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"

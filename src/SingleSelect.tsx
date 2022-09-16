@@ -22,8 +22,10 @@ export const SingleSelect = ({ options, ctaText, questionNumber, handleAnswerCli
     }
 
     const submitAnswer = (value: string) => {
-        setSelected('')
-        handleAnswerClick(value)
+        if (selected) {
+            setSelected('')
+            handleAnswerClick(value)
+        }
     }
 
 
