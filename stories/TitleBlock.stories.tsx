@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta, Story } from '@storybook/react'
-import { TitleBlock } from '../src/TitleBlock'
+import { TitleBlock } from '@sheridan-media/tpl-react'
 
 const meta: Meta = {
     title: 'TitleBlock',
