@@ -42,9 +42,11 @@ export const MultiSelect = ({ options, ctaText, handleAnswerClick }: Props) => {
     }
 
     const submitAnswer = () => {
-        setSelections([])
-        resetCheckboxes()
-        handleAnswerClick(selections)
+        if (selections.length > 0) {
+            setSelections([])
+            resetCheckboxes()
+            handleAnswerClick(selections)
+        }
     }
 
     return (
